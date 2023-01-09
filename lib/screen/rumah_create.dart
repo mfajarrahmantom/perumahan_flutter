@@ -12,27 +12,63 @@ class RumahCreate extends StatefulWidget {
 
 class _RumahCreateState extends State<RumahCreate> {
   String _jenisrumah = '';
+  String _lokasirumah = '';
+  String _harga = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Tambah Rumah',
-          style: TextStyle(color: Color.fromRGBO(43, 205, 255, 1)),
+          style: TextStyle(color: Color.fromARGB(255, 96, 218, 255)),
         ),
-        backgroundColor: const Color.fromARGB(255, 4, 134, 0),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                  colors: <Color>[
+                Color.fromARGB(255, 14, 172, 8),
+                Color.fromARGB(255, 102, 255, 107)
+              ])),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(children: [
           TextField(
             decoration: const InputDecoration(
-              hintText: 'Tuliskan nama jenis rumah baru',
+              hintText: 'Tuliskan jenis rumah baru',
               labelText: 'Input Jenis Rumah',
+              icon: Icon(Icons.add_home_outlined),
             ),
             onChanged: (String value) {
               setState(() {
                 _jenisrumah = value;
+              });
+            },
+          ),
+          TextField(
+            decoration: const InputDecoration(
+              hintText: 'Tuliskan lokasi rumah baru',
+              labelText: 'Input Lokasi Rumah',
+              icon: Icon(Icons.add_location_outlined),
+            ),
+            onChanged: (String value) {
+              setState(() {
+                _lokasirumah = value;
+              });
+            },
+          ),
+          TextField(
+            decoration: const InputDecoration(
+              hintText: 'Tuliskan harga rumah baru',
+              labelText: 'Input Harga Rumah',
+              icon: Icon(Icons.attach_money_outlined),
+            ),
+            onChanged: (String value) {
+              setState(() {
+                _harga = value;
               });
             },
           ),
@@ -46,21 +82,21 @@ class _RumahCreateState extends State<RumahCreate> {
             ),
             onPressed: () {
               ApiService apiService = ApiService();
-              apiService.createRumah(_jenisrumah);
+              apiService.createRumah(_jenisrumah, _lokasirumah, _harga);
 
               Customer customer = Customer(
-                  kdpelanggan: '00103',
-                  nama: 'Mariam',
-                  tanggalbeli: '2022-12-12',
-                  jeniskelamin: 'Wanita',
-                  telp: '0872883717',
-                  rumahkd: 100103);
+                  kdpelanggan: '00104',
+                  nama: 'Parto',
+                  tanggalbeli: '2022-12-29',
+                  jeniskelamin: 'Pria',
+                  telp: '0834354224',
+                  rumahkd: 100107);
               apiService.createCustomer(customer);
             },
           )
         ]),
       ),
-      backgroundColor: const Color.fromARGB(255, 251, 207, 255),
+      backgroundColor: const Color.fromARGB(255, 254, 232, 255),
     );
   }
 }

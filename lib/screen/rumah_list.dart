@@ -29,9 +29,18 @@ class _RumahListState extends State<RumahList> {
       appBar: AppBar(
         title: const Text(
           'Agen Perumahan',
-          style: TextStyle(color: Color.fromARGB(255, 67, 247, 205)),
+          style: TextStyle(color: Color.fromARGB(255, 9, 255, 198)),
         ),
-        backgroundColor: const Color.fromARGB(255, 255, 12, 12),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                  colors: <Color>[
+                Color.fromARGB(255, 255, 102, 92),
+                Color.fromARGB(255, 255, 102, 196)
+              ])),
+        ),
       ),
       body: Center(
         child: FutureBuilder<RumahRead>(
@@ -64,17 +73,19 @@ class _RumahListState extends State<RumahList> {
           Navigator.pushNamed(context, RumahCreate.routeName);
         },
       ),
-      backgroundColor: const Color.fromARGB(255, 208, 255, 207),
+      backgroundColor: const Color.fromARGB(255, 225, 255, 224),
     );
   }
 
   Widget _buildRumahCard(BuildContext context, Rumah rumah) {
     return ListTile(
+      subtitle: Text(rumah.lokasirumah),
       contentPadding:
           const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       title: Text(
         rumah.jenisrumah,
       ),
+      trailing: Text('Rp.${rumah.harga}'),
     );
   }
 }

@@ -16,11 +16,14 @@ class ApiService {
     }
   }
 
-  Future<http.Response> createRumah(String jenisrumah) async {
+  Future<http.Response> createRumah(
+      String jenisrumah, String lokasirumah, String harga) async {
     final response = await http.post(
       Uri.parse("${baseUrl}rumah/create.php"),
       body: jsonEncode(<String, String>{
         'jenis_rumah': jenisrumah,
+        'lokasi_rumah': lokasirumah,
+        'harga': harga,
       }),
     );
     return response;
